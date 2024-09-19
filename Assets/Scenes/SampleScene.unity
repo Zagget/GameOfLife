@@ -2652,16 +2652,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa4167457d1f50d47b75ab097292e480, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  spawnChancePercentage: 15
-  totalCells: 250000
+  speed: 10
+  spawnChancePercentage: 20
+  totalCells: 500000
   grid: {fileID: 710826489}
   tilemap: {fileID: 855239651}
   aliveTile: {fileID: 11400000, guid: 816e83d416b22e6468a3cb18ea0d5ccb, type: 2}
   deadTile: {fileID: 11400000, guid: 16cc36689a575744d8728cbd7c18f8a9, type: 2}
-  speedSlider: {fileID: 0}
-  spawnChanceSlider: {fileID: 0}
-  newGameButton: {fileID: 0}
 --- !u!4 &1869012000
 Transform:
   m_ObjectHideFlags: 0

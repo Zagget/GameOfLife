@@ -205,29 +205,36 @@ public class GameManager : MonoBehaviour
 
     void UpdateCells()
     {
-        Tile tileToSet;
-        
+        TileBase[] tiles = new TileBase[columns * rows];
+        Vector3Int[] positions = new Vector3Int[columns * rows];
+        int tileCount = 0;
+
         for (int y = 0; y < rows; y++)
         {
             for (int x = 0; x < columns; x++)
             {
-                tilePos = new Vector3Int(x, y, 0);
-
                 if (cells[x, y] != futureCells[x, y])
                 {
                     if (futureCells[x, y])
                     {
-                        tileToSet = aliveTile;
+                        tiles[tileCount] = aliveTile;
                     }
                     else
                     {
-                        tileToSet = deadTile;
+                        tiles[tileCount] = deadTile;
                     }
-                    tilemap.SetTile(tilePos, tileToSet);
+                    positions[tileCount] = new Vector3Int(x, y, 0);
+                    tileCount++;
                 }
             }
         }
-        var temp = cells;
+
+        if (tileCount > 0)
+        {
+            tilemap.SetTiles(positions, tiles);
+        }
+
+        bool[,] temp = cells;
         cells = futureCells;
         futureCells = temp;
     }
