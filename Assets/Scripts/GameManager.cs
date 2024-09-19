@@ -20,22 +20,18 @@ public class GameManager : MonoBehaviour
     public Tile aliveTile;
     public Tile deadTile;
 
-    [Header("UI Elements")]
-    public Slider speedSlider;
-    public Slider spawnChanceSlider;
-    public Button newGameButton;
-
     bool[,] cells;
     bool[,] futureCells;
     bool newGame;
     
-    Vector3Int tilePos = new Vector3Int();
+    Vector3Int tilePos;
     
     float cellSize;
     float updateDelay, timeSinceLastUpdate;
     float width, height;
     
     int columns, rows;
+
     void Start()
     {
         Application.targetFrameRate = 30;
@@ -49,17 +45,18 @@ public class GameManager : MonoBehaviour
 
     public void NewGame()
     {
-        newGame = true;
+        newGame = true; 
         ClearTiles();
-        CalculateGridWithTotalCells();
-        AdjustTilemapBounds();
+
+        CalculateGridSize();
+        AdjustGridPosition();
 
         GenerateCells();
         newGame = false;
     }
 
 
-    void CalculateGridWithTotalCells()
+    void CalculateGridSize()
     {
         float aspectRatio = width / height;
 
@@ -72,12 +69,10 @@ public class GameManager : MonoBehaviour
         cellSize = Mathf.Min(cellWidth, cellHeight);
 
         grid.cellSize = new Vector3(cellSize, cellSize, 0);
-
-        Debug.Log($"Calculated exact cellSize: {cellSize}, Grid cellSize: {grid.cellSize}");
     }
 
 
-    void AdjustTilemapBounds()
+    void AdjustGridPosition()
     {
         Vector3 center = new Vector3(-(columns * cellSize) * 0.5f, -(rows * cellSize) * 0.5f, 0);
         grid.transform.position = center;
@@ -97,6 +92,7 @@ public class GameManager : MonoBehaviour
                 cells[x, y] = isAlive;
 
                 tilePos = new Vector3Int(x, y, 0);
+
                 if (isAlive)
                 {
                     tilemap.SetTile(tilePos, aliveTile);
@@ -164,7 +160,6 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
-
                     if (aliveNeighbors == 3)
                     {
                         futureCells[x, y] = true;
@@ -210,13 +205,13 @@ public class GameManager : MonoBehaviour
 
     void UpdateCells()
     {
+        Tile tileToSet;
+        
         for (int y = 0; y < rows; y++)
         {
             for (int x = 0; x < columns; x++)
             {
                 tilePos = new Vector3Int(x, y, 0);
-                Tile tileToSet;
-
 
                 if (cells[x, y] != futureCells[x, y])
                 {

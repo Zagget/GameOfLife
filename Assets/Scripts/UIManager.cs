@@ -21,7 +21,6 @@ public class UIManager : MonoBehaviour
         spawnChanceSlider.value = gameManager.spawnChancePercentage;
         totalCellsSlider.value = gameManager.totalCells;
 
-
         speedSlider.onValueChanged.AddListener(OnSpeedSlider);
         spawnChanceSlider.onValueChanged.AddListener(OnSpawnChance);
         totalCellsSlider.onValueChanged.AddListener(OnTotalCell);

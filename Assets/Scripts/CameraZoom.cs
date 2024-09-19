@@ -9,7 +9,8 @@ public class CameraZoom : MonoBehaviour
     float velocity = 0f;
     float smoothTime = 0.25f;
 
-    [SerializeField] private Camera cam;
+    [SerializeField] 
+    Camera cam;
 
     private void Start()
     {
