@@ -1,3 +1,4 @@
 # GameOfLife
 Simple Game of Life utilizing tiles in unity
-![GameOfLife](https://github.com/user-attachments/assets/b76af480-cbae-407b-bec8-917868be929c)
+
+![GameOfLife](https://github.com/user-attachments/assets/8bfa61a2-fd4d-4ab8-9943-180eb389ad02)
